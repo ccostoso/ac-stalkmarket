@@ -8,8 +8,23 @@ function App() {
 
   return (
     <div className="App">
-      
-    </div>
+      {/* <div className="container-fluid"> */}
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">Animal Crossing</h1>
+            <h3>Stalk Market Calculator</h3>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md">
+
+          </div>
+          <div className="col-md">
+            
+          </div>
+        </div>
+      </div>
+    // </div>
   );
 }
 
