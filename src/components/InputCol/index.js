@@ -8,7 +8,7 @@ function InputCol(props) {
                         <input 
                             type="text" 
                             className="form-control" 
-                            placeholder="AM Price" 
+                            placeholder={`${props.time.toUpperCase()} Price`} 
                             onChange={e => setPrice(e.target.value)}
                         />
                         <div className="input-group-append">

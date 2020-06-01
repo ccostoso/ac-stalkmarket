@@ -11,15 +11,12 @@ import './App.css';
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['acstalkmarket']);
-  const [chartInfo, setChartInfo] = useState();
+  const [chartInfo, setChartInfo] = useState(cookies.acstalkmarket || "");
 
-  // useEffect(() => {
-  //   function handleClick(name, value) {
-  //     setChartInfo({...chartInfo, [timeSelected]: value});
-  //   }
+  useEffect(() => {
+    setCookie('acstalkmarket', JSON.stringify(chartInfo), { path: '/' });
 
-
-  // }, [timeSelected]);
+  }, [chartInfo]);
 
   return (
     <Router>
