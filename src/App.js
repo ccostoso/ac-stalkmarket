@@ -1,30 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import Home from "./pages/Home";
 import './App.css';
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['acstalkmarket']);
-  const [chartInfo, setChartInfo] = useState([]);
+  const [chartInfo, setChartInfo] = useState();
+
+  // useEffect(() => {
+  //   function handleClick(name, value) {
+  //     setChartInfo({...chartInfo, [timeSelected]: value});
+  //   }
+
+
+  // }, [timeSelected]);
 
   return (
-    <div className="App">
-      {/* <div className="container-fluid"> */}
-        <div className="jumbotron jumbotron-fluid">
-          <div className="container">
-            <h1 className="display-4">Animal Crossing</h1>
-            <h3>Stalk Market Calculator</h3>
-          </div>
+    <Router>
+      <header className="jumbotron jumbotron-fluid">
+        <div className="container text-center">
+          <h3>Stalk Market Calculator</h3>
         </div>
-        <div className="row">
-          <div className="col-md">
-
-          </div>
-          <div className="col-md">
-            
-          </div>
-        </div>
-      </div>
-    // </div>
+      </header>
+      <Switch>
+        <Route exact path="/">
+          <Home 
+            setChartInfo={setChartInfo}
+            chartInfo={chartInfo}
+          />
+        </Route>
+      </Switch>      
+    </Router>
   );
 }
 
