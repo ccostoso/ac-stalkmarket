@@ -1,31 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import InputCol from "./../InputCol";
 
-function InputRow(props) {
-    const [dayInfo, setDayInfo] = useState({});
-
+function InputRow({ day, chartInfo, setChartInfo }) {
     return (
-        <div>
-            <div className="row fluid">
-                <div className="col text-center">
-                    <h6>{props.day}</h6>
-                </div>
+        <div className="row">
+            <div className="col-md-2">
+                <h6 className="mt-2">{day.slice(0, 3)}</h6>
             </div>
 
-            <div className="row">
-                <InputCol 
-                    day={props.day}
-                    time={"Am"}
-                    setChartInfo={props.setChartInfo}
-                    chartInfo={props.chartInfo}
-                />
-                <InputCol 
-                    day={props.day}
-                    time={"Pm"}
-                    setChartInfo={props.setChartInfo}
-                    chartInfo={props.chartInfo}
-                />
-            </div>
+            <InputCol
+                day={day}
+                time={"Am"}
+                chartInfo={chartInfo}
+                setChartInfo={setChartInfo}
+            />
+
+            <InputCol
+                day={day}
+                time={"Pm"}
+                chartInfo={chartInfo}
+                setChartInfo={setChartInfo}
+            />
         </div>
     )
 }

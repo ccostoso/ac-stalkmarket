@@ -1,7 +1,8 @@
 import React from "react";
+import InputRowSunday from "./../InputRowSunday";
 import InputRow from "./../InputRow";
 
-function InputForm(props) {
+function InputForm({chartInfo, setChartInfo}) {
     const daysArr = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     return (
@@ -11,13 +12,18 @@ function InputForm(props) {
                     <div className="card-body">
                         <h4 className="text-center">Add Data</h4>
                         <form>
+                        <InputRowSunday
+                            setChartInfo={setChartInfo}
+                            chartInfo={chartInfo}
+                        />
+                        <hr />
                         {daysArr.map(day => {
                             return (
                                 <InputRow
                                     day={day}
                                     key={day}
-                                    setChartInfo={props.setChartInfo}
-                                    chartInfo={props.chartInfo}
+                                    setChartInfo={setChartInfo}
+                                    chartInfo={chartInfo}
                                 />
                             )
                         })}

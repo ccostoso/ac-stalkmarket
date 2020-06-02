@@ -10,13 +10,13 @@ import Home from "./pages/Home";
 import './App.css';
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies(['acstalkmarket']);
-  const [chartInfo, setChartInfo] = useState(cookies.acstalkmarket || "");
+  const [cookies, setCookie] = useCookies(['acstalkmarket']);
+  const [chartInfo, setChartInfo] = useState((cookies.acstalkmarket) || "");
 
   useEffect(() => {
     setCookie('acstalkmarket', JSON.stringify(chartInfo), { path: '/' });
 
-  }, [chartInfo]);
+  }, [chartInfo, setCookie]);
 
   return (
     <Router>
