@@ -14,9 +14,11 @@ const countSubsequentIncreases = arr => {
 
     for (let i = 1; i < arr.length; i++) {
         if (arr[i] > arr[i - 1]) {
+            const diff = arr[i] - arr[i - 1];
 
             if (tracking) {
                 increases[count].length++;
+                increases[count]["steps"].push(diff);
             } else {
                 count++;
                 increases[count] = {
@@ -24,7 +26,8 @@ const countSubsequentIncreases = arr => {
                     start: {
                         index: i - 1,
                         value: arr[i - 1]
-                    }
+                    },
+                    steps: [diff],
                 }
             }
 
@@ -38,7 +41,6 @@ const countSubsequentIncreases = arr => {
             }
 
             tracking = false;
-            length = 2;
         }
     }
 
