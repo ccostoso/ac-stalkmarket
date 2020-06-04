@@ -7,51 +7,52 @@ const findFirstIncrease = arr => {
 }
 
 const countSubsequentIncreases = arr => {
-    // Declare variables. 
-
-    // increases is an object to contain where increase sequence length, as well as their start and end points.
     let increases = {};
-  
-    // count increments upon detection of a new increase sequence.
     let count = 0;
+    let length = 2;
+    let tracking = false;
 
-    // Iterate through array.
     for (let i = 1; i < arr.length; i++) {
-        // Upon finding an increase...
         if (arr[i] > arr[i - 1]) {
-            // Increment count by one.
-            count++;
-          
-            // Begin cataloguing increase sequence in increase object.
-            increases[count] = {
-              length: 1,
-              start: {
-                // Decrement i; this step in for loop is one step ahead.
-                index: --i,
-                value: arr[i]
-              }
-            };
-            
-            // Inner loop; not an optimal solution.
-            let j = i;
-          
-            // Track length of sequence.
-            while (arr[j] < arr[j + 1]) {
-                increases[count]["length"]++;
-                j++;
-              
-                // Reset i to be at end of sequence; ensures that we do not go over previously-catalogued numbers.
-                i++;
+
+            if (tracking) {
+                increases[count].length++;
+            } else {
+                count++;
+                increases[count] = {
+                    length: length,
+                    start: {
+                        index: i - 1,
+                        value: arr[i - 1]
+                    }
+                }
             }
-            
-            increases[count].end = {
-              index: j,
-              value: arr[j]
-            };
-        }        
+
+            tracking = true;
+        } else {
+            if (tracking) {
+                increases[count].end = {
+                    index: i - 1,
+                    value: arr[i - 1]
+                }
+            }
+
+            tracking = false;
+            length = 2;
+        }
     }
 
     return increases;
+}
+
+const catalogStepDifferences = arr => {
+    const stepDifferences = {};
+
+    for (let i = 1; i < arr.length; i++) {
+        stepDifferences[i] = arr[i] - arr[i - 1];
+    }
+
+    return stepDifferences;
 }
 
 module.exports = {
