@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 
-function InputCol({ day, time, chartInfo, setChartInfo }) {
+function InputCol({ day, time, chartInfo, setChartInfo, count, dataCount, setDataCount }) {
     const [price, setPrice] = useState("");
+
+    function inputCheck(input) {
+        const revInput = input.trim() === "" ? 0 : input;
+
+        if (isNaN(revInput)) {
+            return false;
+        }
+
+        if (revInput < 0) {
+            return false;
+        }
+
+        return true;
+    }
 
     return (
         <div className="input-group mb-3 col-5">
@@ -13,10 +27,10 @@ function InputCol({ day, time, chartInfo, setChartInfo }) {
             />
             <div className="input-group-append">
                 <button
-                    className="btn btn-outline-success"
+                    className={`btn btn-outline-success`}
                     type="button"
                     name={time && `${day.toLowerCase()}${time}`}
-                    onClick={e => isNaN(parseInt(price)) ? alert("Must input a number") : setChartInfo({ ...chartInfo, [e.target.name]: price })}
+                    onClick={e => inputCheck(price) ? setChartInfo({ ...chartInfo, prices: {...chartInfo.prices, [day.toLowerCase()]: {...chartInfo.prices[[day.toLowerCase()]], [time.toLowerCase()]: price} }}) : alert("Please insert a positive number.")}
                 >
                     Add
                 </button>

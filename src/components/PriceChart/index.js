@@ -1,48 +1,77 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import calculate from "./../../utils/calculate";
 
 function PriceChart({chartInfo}) {
+    const { quantity, prices } = chartInfo;
+
+    const pricesObj = {
+        0: parseInt(prices.sunday),
+        1: parseInt(prices.monday.am),
+        2: parseInt(prices.monday.pm),
+        3: parseInt(prices.tuesday.am),
+        4: parseInt(prices.tuesday.pm),
+        5: parseInt(prices.wednesday.am),
+        6: parseInt(prices.wednesday.pm),
+        7: parseInt(prices.thursday.am),
+        8: parseInt(prices.thursday.pm),
+        9: parseInt(prices.friday.am),
+        10: parseInt(prices.friday.pm),
+        11: parseInt(prices.saturday.am),
+        12: parseInt(prices.saturday.pm),
+    }
+
+    const pricesArr = Object.values(pricesObj);
+    let initialPurchase = quantity * prices.sunday;
+    let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1;
+
     const dataState = {
-        labels: ["Monday AM", "Monday PM", "Tuesday AM", "Tuesday PM", "Wednesday AM", "Wednesday PM", "Thursday AM", "Thursday PM", "Friday AM", "Friday PM", "Saturday AM", "Saturday PM",],
+        labels: ["Sunday", "Monday AM", "Monday PM", "Tuesday AM", "Tuesday PM", "Wednesday AM", "Wednesday PM", "Thursday AM", "Thursday PM", "Friday AM", "Friday PM", "Saturday AM", "Saturday PM",],
         datasets: [
             {
                 label: 'Price',
                 fill: false,
-                lineTension: 0.5,
+                lineTension: 0,
                 backgroundColor: 'rgba(75,192,192,1)',
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 2,
-                data: [chartInfo.mondayAm, chartInfo.mondayPm, chartInfo.tuesdayAm, chartInfo.tuesdayPm, chartInfo.wednesdayAm, chartInfo.wednesdayPm, chartInfo.thursdayAm, chartInfo.thursdayPm, chartInfo.fridayAm, chartInfo.fridayPm, chartInfo.saturdayAm, chartInfo.saturdayPm]
+                data: pricesArr,
             }
         ]
     }
 
+    const determineTrendTest = prices => {
+        if (calculate.isDeclining(prices)) {
+            return "Declining";
+        }
+    }
+
     const determineTrend = () => {
-        if (chartInfo.mondayAm > 99) {
+        if (prices.monday.am > 99) {
             return "Random";
         }
 
-        if (chartInfo.mondayAm > 50 && chartInfo <= 99) {
+        if (prices.monday.am > 50 && chartInfo <= 99) {
             if (
-                (chartInfo.mondayAm > chartInfo.mondayPM)
+                (prices.monday.am > prices.monday.pm)
                 &&
-                (chartInfo.mondayPM > chartInfo.tuesdayAm)
+                (prices.monday.pm > prices.tuesday.am)
                 &&
-                (chartInfo.tuesdayAm > chartInfo.tuesdayPm)
+                (prices.tuesday.am > prices.tuesday.pm)
                 &&
-                (chartInfo.tuesdayPm < chartInfo.wedensdayAm)
+                (prices.tuesday.pm < prices.wedensday.am)
                 ) {
                     return "Big Spike";
             } else if (
-                (chartInfo.mondayAm > chartInfo.mondayPM)
+                (prices.monday.am > prices.monday.pm)
                 &&
-                (chartInfo.mondayPM > chartInfo.tuesdayAm)
+                (prices.monday.pm > prices.tuesday.am)
                 &&
-                (chartInfo.tuesdayAm > chartInfo.tuesdayPm)
+                (prices.tuesday.am > prices.tuesday.pm)
                 &&
-                (chartInfo.tuesdayPm > chartInfo.wedensdayAm)
+                (prices.tuesday.pm > prices.wedensday.am)
                 &&
-                (chartInfo.wedensdayAm < chartInfo.wednesdayPm)
+                (prices.wedensday.am < prices.wednesday.pm)
              ) {
                     return "Small Spike";
             } else {
@@ -52,6 +81,16 @@ function PriceChart({chartInfo}) {
 
         return "Still unclear...";
     }
+
+    const findProfit = () => {
+        console.log("initial purchase:", initialPurchase);
+        console.log("pricesArr[lastPriceIdx]", pricesArr[lastPriceIdx]);
+        console.log("pricesArr", pricesArr);
+        console.log("lastPriceIdx", lastPriceIdx);
+        return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
+    }
+
+    console.log(findProfit());
 
     return (
         <section className="col-md-7">
@@ -69,12 +108,20 @@ function PriceChart({chartInfo}) {
                                 legend: {
                                     display: false,
                                     position: 'right'
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        tikcs: {
+                                            suggestedMin: 0,
+                                        }
+                                    }]
                                 }
                             }}
                         />
                         <br />
                         <br />
                         <h3 className="text-center">Trend is: {determineTrend()}</h3>
+                        <h4 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {findProfit()} Bells.</h4>
                         {JSON.stringify(chartInfo)}
                     </div>
                 </article>
