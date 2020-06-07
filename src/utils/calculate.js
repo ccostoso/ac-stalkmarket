@@ -7,25 +7,26 @@ const findFirstIncrease = arr => {
 }
 
 const countSubsequentIncreases = arr => {
+    let arrFromMonday = arr.slice(1);
     let increases = {};
     let count = 0;
-    let length = 2;
+    let size = 2;
     let tracking = false;
 
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > arr[i - 1]) {
-            const diff = arr[i] - arr[i - 1];
+    for (let i = 1; i < arrFromMonday.length; i++) {
+        if (arrFromMonday[i] > arrFromMonday[i - 1]) {
+            const diff = arrFromMonday[i] - arrFromMonday[i - 1];
 
             if (tracking) {
-                increases[count].length++;
+                increases[count].size++;
                 increases[count]["steps"].push(diff);
             } else {
                 count++;
                 increases[count] = {
-                    length: length,
+                    size: size,
                     start: {
                         index: i - 1,
-                        value: arr[i - 1]
+                        value: arrFromMonday[i - 1]
                     },
                     steps: [diff],
                 }
@@ -36,7 +37,7 @@ const countSubsequentIncreases = arr => {
             if (tracking) {
                 increases[count].end = {
                     index: i - 1,
-                    value: arr[i - 1]
+                    value: arrFromMonday[i - 1]
                 }
             }
 
@@ -57,9 +58,41 @@ const catalogStepDifferences = arr => {
     return stepDifferences;
 }
 
+const spikeBigOrSmall = arr => {
+    const greaterThanOrEqualToForty = arr.filter(num => num >= 40).length;
+    const lessThanForty =  arr.filter(num => num < 40).length;
+
+    if (greaterThanOrEqualToForty && !lessThanForty) {
+        return arr.length === 2 ? ["Big Spike", "bigSpike", "likely"] : ["Big Spike", "bigSpike", "certain"];
+    }
+
+    if (!greaterThanOrEqualToForty && lessThanForty) {
+        return arr.length === 3 ? ["Small Spike", "smallSpike", "likely"] : ["Small Spike", "smallSpike", "certain"];
+    }
+
+    return greaterThanOrEqualToForty > lessThanForty ? ["Random", "random", "maybeBigSpike"] : ["Random", "random", "maybeSmallSpike"];
+}
+
 module.exports = {
+    analyze: function (pricesArr) {
+        let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) >= 0 ? pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1 : pricesArr.length - 1;
+        const increases = Object.values(countSubsequentIncreases(pricesArr));
+        console.log("pricesArr", pricesArr);
+        console.log("increases", increases);
+        console.log("increases.length", increases.length);
+
+        if (lastPriceIdx < 2) return ["Unsure", "unsure", "certain"];
+        if (lastPriceIdx > 7 && (!increases.length)) return ["Declining", "declining", "certain"];
+
+        if (increases.length > 1) return ["Random", "random", "certain"]; 
+        console.log(increases[0]["size"]);
+        if (increases.length && increases[0]["size"] === 2) return ["Unsure", "unsure", "notDeclining"];
+        if (increases.length && increases[0]["size"] > 2) return spikeBigOrSmall(increases[0]["steps"]);
+
+        return ["Unsure", "unsure", "notDeclining"];
+    },
     isDeclining: function (pricesArr) {
-        return findFirstIncrease(pricesArr) ? true : false;
+        return findFirstIncrease(pricesArr) ? false : true;
     },
     isBigSpike: function (pricesArr) {
         const firstIncreaseIdx = findFirstIncrease(pricesArr);

@@ -23,7 +23,7 @@ function PriceChart({chartInfo}) {
 
     const pricesArr = Object.values(pricesObj);
     let initialPurchase = quantity * prices.sunday;
-    let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1;
+    let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) >= 0 ? pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1 : pricesArr.length - 1;
 
     const dataState = {
         labels: ["Sunday", "Monday AM", "Monday PM", "Tuesday AM", "Tuesday PM", "Wednesday AM", "Wednesday PM", "Thursday AM", "Thursday PM", "Friday AM", "Friday PM", "Saturday AM", "Saturday PM",],
@@ -40,11 +40,8 @@ function PriceChart({chartInfo}) {
         ]
     }
 
-    const determineTrendTest = prices => {
-        if (calculate.isDeclining(prices)) {
-            return "Declining";
-        }
-    }
+    const answerArr = calculate.analyze(pricesArr);
+    console.log("answerArr", answerArr);
 
     const determineTrend = () => {
         if (prices.monday.am > 99) {
@@ -83,14 +80,8 @@ function PriceChart({chartInfo}) {
     }
 
     const findProfit = () => {
-        console.log("initial purchase:", initialPurchase);
-        console.log("pricesArr[lastPriceIdx]", pricesArr[lastPriceIdx]);
-        console.log("pricesArr", pricesArr);
-        console.log("lastPriceIdx", lastPriceIdx);
         return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
     }
-
-    console.log(findProfit());
 
     return (
         <section className="col-md-7">

@@ -17,7 +17,6 @@
     },
     "unsure": {
         "certain": "It's too early to tell where things stand—with more information, I can provide you with better predictions.",
-        "notDeclining": "While it's still to early to tell what kind of pattern we're seeing, I can say  for sure that this is <strong>not</strong> a <strong>declining</strong> pattern.",
-        "notRandom": "While it's still to early to tell what kind of pattern we're seeing, I can say for sure that this is <strong>not</strong> a <strong>random</strong> pattern."
+        "notDeclining": "While it's still to early to tell what kind of pattern we're seeing, I can say for sure that this is <strong>not</strong> a <strong>declining</strong> pattern."
     }
 }

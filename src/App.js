@@ -43,10 +43,20 @@ function App() {
 
   const [cookies, setCookie] = useCookies(['acstalkmarket']);
   const [chartInfo, setChartInfo] = useState((cookies.acstalkmarket) || chartInfoDefault);
-  console.log(cookies.acstalkmarket);
+
+  const nextSunday = () => {
+    const today = new Date();
+    const result = new Date(today);
+    const ifSunday = today.getDay() ? 0 : 7;
+
+    result.setHours(6, 0, 0);
+    result.setDate(today.getDate() + (7 - today.getDay()) % 7 + ifSunday);
+
+    return result;
+  }
 
   useEffect(() => {
-    setCookie('acstalkmarket', JSON.stringify(chartInfo), { path: '/' });
+    setCookie('acstalkmarket', JSON.stringify(chartInfo), { path: '/', expires: nextSunday() });
 
   }, [chartInfo, setCookie]);
 
@@ -59,12 +69,12 @@ function App() {
       </header>
       <Switch>
         <Route exact path="/">
-          <Home 
+          <Home
             setChartInfo={setChartInfo}
             chartInfo={chartInfo}
           />
         </Route>
-      </Switch>      
+      </Switch>
     </Router>
   );
 }
