@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import calculate from "./../../utils/calculate";
 import advice from "./../../utils/advice.json";
 
@@ -42,7 +43,8 @@ function PriceChart({chartInfo}) {
     }
 
     const answerArr = calculate.analyze(pricesArr);
-    console.log("answerArr", answerArr);
+    const suggestion = ReactHtmlParser(advice[answerArr[1]][answerArr[2]]);
+    console.log(suggestion);
 
     const findProfit = () => {
         return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
@@ -78,7 +80,7 @@ function PriceChart({chartInfo}) {
                         <br />
                         <h3 className="text-center">Trend is: {answerArr[0]}</h3>
                         <p className="container">
-                            {advice[answerArr[1]][answerArr[2]]}
+                            {suggestion}
                         </p>
                         <h5 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {findProfit()} Bells.</h5>
                     </div>
