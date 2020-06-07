@@ -5,15 +5,17 @@ import "./style.css";
 
 function Home(props) {
     return (
-        <main className="row">
-            <PriceChart 
-                chartInfo={props.chartInfo}
-            />
-            <InputForm
-                setChartInfo={props.setChartInfo}
-                chartInfo={props.chartInfo}
-            />
-        </main>
+        <div className="container-fluid">
+            <main className="row">
+                <PriceChart
+                    chartInfo={props.chartInfo}
+                />
+                <InputForm
+                    setChartInfo={props.setChartInfo}
+                    chartInfo={props.chartInfo}
+                />
+            </main>
+        </div>
     )
 }
 

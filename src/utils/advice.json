@@ -3,20 +3,20 @@
         "certain": "Unfortunately, I'm quite bearish on the market. It's already Thursday, and the market hasn't increased all week. Given the steady decline and the consistent margin of difference between each update, it's clear to me that this is a <strong>declining</strong> pattern. Sell now—prices will only continue to decrease."
     },
     "bigSpike": {
-        "likely": "Things can always change, but given the consistent rate of growth over the past two days, it appears as if this is a <strong>big spike</strong>. I'd say hold off until the next change in price before selling—you might be making a lot of bells this round!",
-        "certain": "This is it—a <strong>big spike</strong>! The next updates's prices will be lower, so sell now!"
+        "certain": "This is it—a <strong>big spike</strong>! After the peak, subsequent prices will only go lower, so sell now!",
+        "likely": "Things can always change, but given the consistent rate of growth over the past two days, it appears as if this is a <strong>big spike</strong>. I'd say hold off until the next change in price before selling—you might be making a lot of bells this round!"
     },
     "smallSpike": {
-        "likely": "Things can always change, but given the consistent rate of growth over the past three days, it appears as if this is a <strong>small spike</strong>. I'd say hold off until the next change in price before selling—you might be making a fair amount of bells this round!",
-        "certain": "This is it—a <strong>small spike</strong>! The next updates's prices will be lower, so sell now!"
+        "certain": "This is it—a <strong>small spike</strong>! After the peak, subsequent prices will only go lower, so sell now!",
+        "likely": "Things can always change, but given the consistent rate of growth over the past few days, it appears as if this is a <strong>small spike</strong>. I'd say hold off until the fourth increase in price—you might be making a fair amount of bells this round!"
     },
     "random": {
-        "certain": "I'm confident that this is a <strong>random</strong> pattern cycle. Prices are likely to fluctuate, but will generally stay within the 50-200 bell range. It's difficult to say when exactly to sell, but you're likely see prices cross the 120 bell mark. Consider selling then.",
+        "certain": "I'm confident that this is a <strong>random</strong> pattern cycle. Prices will fluctuate, but should generally stay within the 50-200 bell range. It's difficult to say exactly when it's best to sell, but you're likely see prices climb above the 120 bell mark twice. Consider selling then.",
         "maybeBigSpike": "This is likely a <strong>random</strong> pattern cycle. While there is the potential for a <strong>big spike</strong>, the size of the last two increases have not been consistent in the way that usually marks the <strong>big spike</strong> pattern. Consider selling now; the next update may see higher prices, but it is not a given.",
         "maybeSmallSpike": "This is likely a <strong>random</strong> pattern cycle. While there is the potential for a <strong>small spike</strong>, the size of the last three increases have not been consistent in the way that usually marks the <strong>small spike</strong> pattern. Consider selling now; the next update may see higher prices, but it is not a given."
     },
     "unsure": {
         "certain": "It's too early to tell where things stand—with more information, I can provide you with better predictions.",
-        "notDeclining": "While it's still to early to tell what kind of pattern we're seeing, I can say for sure that this is <strong>not</strong> a <strong>declining</strong> pattern."
+        "notDeclining": "While it's still to early to tell what kind of pattern we're seeing, I can say for sure that this is <em>not</em> a <strong>declining</strong> pattern."
     }
 }

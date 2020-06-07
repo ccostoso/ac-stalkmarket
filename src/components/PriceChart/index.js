@@ -1,6 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import calculate from "./../../utils/calculate";
+import advice from "./../../utils/advice.json";
 
 function PriceChart({chartInfo}) {
     const { quantity, prices } = chartInfo;
@@ -43,42 +44,6 @@ function PriceChart({chartInfo}) {
     const answerArr = calculate.analyze(pricesArr);
     console.log("answerArr", answerArr);
 
-    const determineTrend = () => {
-        if (prices.monday.am > 99) {
-            return "Random";
-        }
-
-        if (prices.monday.am > 50 && chartInfo <= 99) {
-            if (
-                (prices.monday.am > prices.monday.pm)
-                &&
-                (prices.monday.pm > prices.tuesday.am)
-                &&
-                (prices.tuesday.am > prices.tuesday.pm)
-                &&
-                (prices.tuesday.pm < prices.wedensday.am)
-                ) {
-                    return "Big Spike";
-            } else if (
-                (prices.monday.am > prices.monday.pm)
-                &&
-                (prices.monday.pm > prices.tuesday.am)
-                &&
-                (prices.tuesday.am > prices.tuesday.pm)
-                &&
-                (prices.tuesday.pm > prices.wedensday.am)
-                &&
-                (prices.wedensday.am < prices.wednesday.pm)
-             ) {
-                    return "Small Spike";
-            } else {
-                return "Declining";
-            }
-        }
-
-        return "Still unclear...";
-    }
-
     const findProfit = () => {
         return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
     }
@@ -111,9 +76,11 @@ function PriceChart({chartInfo}) {
                         />
                         <br />
                         <br />
-                        <h3 className="text-center">Trend is: {determineTrend()}</h3>
-                        <h4 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {findProfit()} Bells.</h4>
-                        {JSON.stringify(chartInfo)}
+                        <h3 className="text-center">Trend is: {answerArr[0]}</h3>
+                        <p className="container">
+                            {advice[answerArr[1]][answerArr[2]]}
+                        </p>
+                        <h5 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {findProfit()} Bells.</h5>
                     </div>
                 </article>
             </div>
