@@ -47,10 +47,9 @@ function App() {
   const nextSunday = () => {
     const today = new Date();
     const result = new Date(today);
-    const ifSunday = today.getDay() ? 0 : 7;
 
     result.setHours(6, 0, 0);
-    result.setDate(today.getDate() + (7 - today.getDay()) % 7 + ifSunday);
+    result.setDate(today.getDate() + (7 - today.getDay()));
 
     return result;
   }

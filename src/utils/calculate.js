@@ -65,7 +65,10 @@ module.exports = {
         if (lastPriceIdx > 7 && (!increases.length)) return ["Declining", "declining", "certain"];
 
         if (increases.length > 1) return ["Random", "random", "certain"]; 
-        console.log(increases[0]["size"]);
+        increases[0] && console.log(increases[0]["size"]);
+        increases[0] && console.log(increases[0]["end"]);
+        console.log(increases.length && increases[0]["size"] === 3 && increases[0]["end"]);
+        if (increases.length && increases[0]["size"] === 3 && increases[0]["end"]) return ["Random", "random", "certain"];
         if (increases.length && increases[0]["size"] === 2) return ["Unsure", "unsure", "notDeclining"];
         if (increases.length && increases[0]["size"] > 2) return spikeBigOrSmall(increases[0]["steps"]);
 

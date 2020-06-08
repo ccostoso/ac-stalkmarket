@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function InputCol({ day, time, chartInfo, setChartInfo, count, dataCount, setDataCount }) {
+    // console.log("count", count);
     const [price, setPrice] = useState("");
 
     function inputCheck(input) {
