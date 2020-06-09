@@ -8,23 +8,23 @@ function PriceChart({chartInfo}) {
     const { quantity, prices } = chartInfo;
 
     const pricesObj = {
-        0: parseInt(prices.sunday),
-        1: parseInt(prices.monday.am),
-        2: parseInt(prices.monday.pm),
-        3: parseInt(prices.tuesday.am),
-        4: parseInt(prices.tuesday.pm),
-        5: parseInt(prices.wednesday.am),
-        6: parseInt(prices.wednesday.pm),
-        7: parseInt(prices.thursday.am),
-        8: parseInt(prices.thursday.pm),
-        9: parseInt(prices.friday.am),
-        10: parseInt(prices.friday.pm),
-        11: parseInt(prices.saturday.am),
-        12: parseInt(prices.saturday.pm),
+        0: parseInt(prices.sunday.price),
+        1: parseInt(prices.monday.am.price),
+        2: parseInt(prices.monday.pm.price),
+        3: parseInt(prices.tuesday.am.price),
+        4: parseInt(prices.tuesday.pm.price),
+        5: parseInt(prices.wednesday.am.price),
+        6: parseInt(prices.wednesday.pm.price),
+        7: parseInt(prices.thursday.am.price),
+        8: parseInt(prices.thursday.pm.price),
+        9: parseInt(prices.friday.am.price),
+        10: parseInt(prices.friday.pm.price),
+        11: parseInt(prices.saturday.am.price),
+        12: parseInt(prices.saturday.pm.price),
     }
 
     const pricesArr = Object.values(pricesObj);
-    let initialPurchase = quantity * prices.sunday;
+    let initialPurchase = quantity * prices.sunday.price;
     let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) >= 0 ? pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1 : pricesArr.length - 1;
 
     const dataState = {
@@ -44,7 +44,6 @@ function PriceChart({chartInfo}) {
 
     const answerArr = calculate.analyze(pricesArr);
     const suggestion = ReactHtmlParser(advice[answerArr[1]][answerArr[2]]);
-    console.log(suggestion);
 
     const findProfit = () => {
         return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;

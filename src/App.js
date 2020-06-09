@@ -11,32 +11,72 @@ import './App.css';
 
 function App() {
   const chartInfoDefault = {
+    dataCount: 1,
     quantity: 0,
     prices: {
-      sunday: 0,
+      sunday:{
+        key: 0,
+        price: 0,
+      },
       monday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 1,
+          price: 0,
+        },
+        pm: {
+          key: 2,
+          price: 0,
+        },
       },
       tuesday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 3,
+          price: 0,
+        },
+        pm: {
+          key: 4,
+          price: 0,
+        },
       },
       wednesday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 5,
+          price: 0,
+        },
+        pm: {
+          key: 6,
+          price: 0,
+        },
       },
       thursday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 7,
+          price: 0,
+        },
+        pm: {
+          key: 8,
+          price: 0,
+        },
       },
       friday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 9,
+          price: 0,
+        },
+        pm: {
+          key: 10,
+          price: 0,
+        },
       },
       saturday: {
-        am: 0,
-        pm: 0,
+        am: {
+          key: 11,
+          price: 0,
+        },
+        pm: {
+          key: 12,
+          price: 0,
+        },
       }
     }
   }

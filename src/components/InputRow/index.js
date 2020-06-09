@@ -1,7 +1,7 @@
 import React from "react";
 import InputCol from "./../InputCol";
 
-function InputRow({ day, chartInfo, setChartInfo, dataCount, setDataCount, priceKeys }) {
+function InputRow({ day, chartInfo, setChartInfo, dataCount, setDataCount }) {
     return (
         <div className="row">
             <div className="col-md-2">
@@ -10,22 +10,22 @@ function InputRow({ day, chartInfo, setChartInfo, dataCount, setDataCount, price
 
             <InputCol
                 day={day}
-                time={"Am"}
-                count={priceKeys[`${day.toLowerCase()}Am`]}
-                chartInfo={chartInfo}
-                setChartInfo={setChartInfo}
+                time={"am"}
+                count={chartInfo.prices[`${day.toLowerCase()}`].am.key}
                 dataCount={dataCount}
                 setDataCount={setDataCount}
+                chartInfo={chartInfo}
+                setChartInfo={setChartInfo}
             />
 
             <InputCol
                 day={day}
-                time={"Pm"}
-                count={priceKeys[`${day.toLowerCase()}Pm`]}
-                chartInfo={chartInfo}
-                setChartInfo={setChartInfo}
+                time={"pm"}
+                count={chartInfo.prices[`${day.toLowerCase()}`].pm.key}
                 dataCount={dataCount}
                 setDataCount={setDataCount}
+                chartInfo={chartInfo}
+                setChartInfo={setChartInfo}
             />
         </div>
     )

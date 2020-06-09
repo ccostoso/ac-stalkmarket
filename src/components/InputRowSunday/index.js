@@ -24,7 +24,22 @@ function InputRowSunday({ day, chartInfo, setChartInfo }) {
                         className="btn btn-outline-success"
                         type="button"
                         name="sunday"
-                        onClick={e => isNaN(parseInt(price)) ? alert("Must input a number") : setChartInfo({ ...chartInfo, prices: {...chartInfo.prices, [e.target.name]: price} })}
+                        onClick={e => isNaN(parseInt(price))
+                            ?
+                            alert("Must input a number")
+                            :
+                            setChartInfo(
+                                {
+                                    ...chartInfo,
+                                    prices: {
+                                        ...chartInfo.prices,
+                                        sunday: {
+                                            ...chartInfo.prices.sunday,
+                                            price: price
+                                        }
+                                    }
+                                }
+                            )}
                     >
                         Add
                 </button>
