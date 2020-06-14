@@ -45,9 +45,7 @@ function PriceChart({chartInfo}) {
     const answerArr = calculate.analyze(pricesArr);
     const suggestion = ReactHtmlParser(advice[answerArr[1]][answerArr[2]]);
 
-    const findProfit = () => {
-        return (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
-    }
+    const findProfit = () => isNaN((pricesArr[lastPriceIdx] * quantity) - initialPurchase) ? 0 : (pricesArr[lastPriceIdx] * quantity) - initialPurchase;
 
     return (
         <section className="col-md-7">
@@ -81,7 +79,7 @@ function PriceChart({chartInfo}) {
                         <p className="container">
                             {suggestion}
                         </p>
-                        <h5 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {findProfit()} Bells.</h5>
+                        <h5 className="text-center">If you sell now, you {findProfit() >= 0 ? "will gain" : "will lose"} {Math.abs(findProfit())} Bells.</h5>
                     </div>
                 </article>
             </div>

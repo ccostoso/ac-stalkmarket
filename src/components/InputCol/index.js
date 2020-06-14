@@ -35,7 +35,7 @@ function InputCol({ day, time, chartInfo, setChartInfo, count, dataCount, setDat
             alert("Please insert a positive number.");
         }
     }
-
+    
     return (
         <div className="input-group mb-3 col-5">
             <input

@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+#root {
+  background: url("./components/Header/wallpaper_v1.png") repeat center top;
+}
