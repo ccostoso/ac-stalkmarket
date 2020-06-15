@@ -24,6 +24,7 @@ function PriceChart({chartInfo}) {
     }
 
     const pricesArr = Object.values(pricesObj);
+    console.log(pricesArr);
     let initialPurchase = quantity * prices.sunday.price;
     let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) >= 0 ? pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1 : pricesArr.length - 1;
 

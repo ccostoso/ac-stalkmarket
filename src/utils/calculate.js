@@ -59,7 +59,6 @@ module.exports = {
     analyze: function (pricesArr) {
         let lastPriceIdx = pricesArr.indexOf(pricesArr.find(ele => ele === 0)) >= 0 ? pricesArr.indexOf(pricesArr.find(ele => ele === 0)) - 1 : pricesArr.length - 1;
         const increases = Object.values(countSubsequentIncreases(pricesArr));
-        console.log("increases", increases);
 
         if (lastPriceIdx < 2) return ["Unsure", "unsure", "certain"];
         if (lastPriceIdx > 7 && (!increases.length)) return ["Declining", "declining", "certain"];
